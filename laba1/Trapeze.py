@@ -4,7 +4,7 @@ class Trapeze:
         adges = [a, b, c, d]
         adges.sort()
         a, b, c, d = adges
-        assert a != d
+        assert a == b and c == d
         self.a = a
         self.b = b
         self.c = c
@@ -13,8 +13,7 @@ class Trapeze:
     def perimeter(self):
         return self.a + self.b + self.c + self.d
     def area(self):
-        dr = ((self.d - self.a)**2 + self.c**2 - self.b**2)/(2*(self.d - self.a))
-        return ((self.a + self.d)/2) * (self.c**2 - dr**2)**0.5
+        return
     #перевірити формулу площі!
 
 if __name__ == '__main__':
