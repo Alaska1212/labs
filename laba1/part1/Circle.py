@@ -2,7 +2,6 @@
 import math
 class Circle:
     def __init__(self, a: float):
-        assert a > 0
         self.a = a
     def perimeter(self):
         return self.a * 2 * math.pi
