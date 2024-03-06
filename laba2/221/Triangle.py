@@ -6,7 +6,7 @@ class Triangle:
     def __init__(self, x1, y1, x2, y2):
         self.vertex1 = (x1, y1)
         self.vertex2 = (x2, y2)
-        self.color =   None
+        self.color = None
 
         self.position = (randint(-200, 200), randint(-200, 200))
 
