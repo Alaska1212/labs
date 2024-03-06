@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     triangle = Triangle((randint(-100, 200)), (randint(-100, 200)), (randint(-100, 200)), (randint(-100, 200)))
 
-for _ in range(120):
+for i in range(120):
     triangle.draw()
     triangle.rotate(3)
     turtle.clear()
