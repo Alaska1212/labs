@@ -24,9 +24,8 @@ def max_perimeter(figures):
     return max_perimeter_figure
 
 
-file_path = 'input02.txt'
 
-reader = FigureReader(file_path)
+reader = FigureReader('input02.txt')
 figures_list = reader.read()
 
 max_area_figure = max_area(figures_list)
