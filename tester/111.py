@@ -1,27 +1,14 @@
-import turtle
-
-
-turtle.home()
-turtle.up()
-turtle.left(330)
-turtle.forward(180)
-
-turtle.down()
-turtle.left(120)
-turtle.forward(20)
-turtle.left(180)
-turtle.forward(20)
-turtle.left(90)
-turtle.forward(20)
-turtle.left(90)
-turtle.forward(20)
-turtle.left(180)
-turtle.forward(40)
-
-turtle.up()
-
-
-
-
-
-turtle.mainloop()
+def drow_num(self):
+    three = Three()
+    two = Two()
+    one = One()
+    twelve = Twelve()
+    eleven = Eleven()
+    ten = Ten()
+    nine = Nine()
+    eight = Eight()
+    seven = Seven()
+    six = Six()
+    five = Five()
+    four = Four()
+    return one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve

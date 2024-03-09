@@ -5,6 +5,7 @@ class Three():
         self = None
 
     def drow(self):
+        turtle.home()
         turtle.up()   #Підняти пензель
         turtle.forward(180) #Зміститися вперед на
         turtle.down()#Опустити пензель
@@ -191,6 +192,7 @@ class Eight:
             turtle.right(90)
             turtle.forward(20)
         turtle.up()
+
 class Seven:
     def __init__(self):
         self = None
@@ -275,46 +277,6 @@ class Four:
         turtle.forward(20)
         turtle.left(180)
         turtle.forward(40)
-
         turtle.up()
+        turtle.home()
 
-if __name__ == '__main__':
-    turtle.speed(0)
-
-    three = Three()
-    three.drow()
-
-    two = Two()
-    two.drow()
-
-    one = One()
-    one.drow()
-
-    twelve = Twelve()
-    twelve.drow()
-
-    eleven = Eleven()
-    eleven.drow()
-
-    ten = Ten()
-    ten.drow()
-
-    nine = Nine()
-    nine.drow()
-
-    eight = Eight()
-    eight.drow()
-
-    seven = Seven()
-    seven.drow()
-
-    six = Six()
-    six.drow()
-
-    five = Five()
-    five.drow()
-
-    four = Four()
-    four.drow()
-
-turtle.mainloop()
