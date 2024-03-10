@@ -279,4 +279,3 @@ class Four:
         turtle.forward(40)
         turtle.up()
         turtle.home()
-

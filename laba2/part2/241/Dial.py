@@ -11,6 +11,8 @@ from Numbers import Nine
 from Numbers import Ten
 from Numbers import Eleven
 from Numbers import Twelve
+from Arrow import Arrow
+
 
 
 class Dial:
@@ -27,8 +29,9 @@ class Dial:
         turtle.up()
 
 
+
 if __name__ == '__main__':
-    turtle.speed(0)
+    turtle.speed(50)
 
     dial = Dial()
     dial.circle()
@@ -68,5 +71,8 @@ if __name__ == '__main__':
 
     four = Four()
     four.drow()
+
+    arrow = Arrow()
+    arrow.drow()
 
 turtle.mainloop()
