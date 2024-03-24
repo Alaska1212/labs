@@ -31,7 +31,7 @@ class Dial:
 
 
 if __name__ == '__main__':
-    turtle.speed(50)
+    turtle.speed(0)
 
     dial = Dial()
     dial.circle()
