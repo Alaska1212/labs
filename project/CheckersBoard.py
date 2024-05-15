@@ -1,11 +1,11 @@
 import tkinter as tk
 
 class CheckersBoard(tk.Frame):
-    def __init__(self, color1="peru", color2="grey6"):
+    def __init__(self, color1, color2):
         super().__init__()
         self.color1 = color1
         self.color2 = color2
-        self.pack()
+        self.pack()  #для розміщення рамки (tk.Frame) в головному вікні
         self.board = tk.Canvas(self, width=400, height=400)
         self.board.pack()
         self.draw_board()
@@ -17,5 +17,5 @@ class CheckersBoard(tk.Frame):
                 self.board.create_rectangle(j * 50, i * 50, (j + 1) * 50, (i + 1) * 50, fill=color)
 
 root = tk.Tk()
-app = CheckersBoard(color1="peru", color2="grey6")
+app = CheckersBoard("peru","grey6")
 app.mainloop()
