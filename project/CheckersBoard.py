@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class CheckersBoard(tk.Frame):
-    def __init__(self, color1="black", color2="white"):
+    def __init__(self, color1="peru", color2="grey6"):
         super().__init__()
         self.color1 = color1
         self.color2 = color2
