@@ -1,30 +1,23 @@
-import turtle
+from tkinter import *
+root = Tk()
 
-turtlePen = turtle.Turtle()
-window = turtle.Screen()
+# Створюємо полотно
+canvas = Canvas(root, width=400, height=300)
+canvas.pack(side=LEFT)
 
-window.bgcolor("black")
+# Створюємо овал
+id = canvas.create_oval(20, 20, 40, 40)
 
+def onCanvasClick(ev):
+    move(id)
 
-def polygon(n, size=80):
-    if n > 2:
-        angle = 360 / n
+def move(ids):
+# Переміщуємо елемент на 5 пікселів по осі X
+    canvas.move(ids, 5, 0)
+# Рекурсивно викликаємо функцію move через 25 мілісекунд
+# та передаємо їй параметр ids
+    canvas.after(25, move, ids)
 
-        for n in range(0, n):
-            turtlePen.left(angle)
-            turtlePen.forward(size)
+canvas.bind('<Button-1>', onCanvasClick)
 
-
-turtlePen.speed(100)
-
-colors = ['orange', 'cyan', 'blue', 'green', 'red']
-
-size = 40
-
-for i in range(0, 60):
-    turtlePen.color(colors[i % 5])
-    polygon(4, size)
-    turtlePen.left(5)
-    size = size + 3
-
-window.mainloop()
+root.mainloop()

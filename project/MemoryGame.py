@@ -12,9 +12,8 @@ class MemoryGame:
         self.buttons = []
         self.flipped = []
 
-        self.create_board()
+        self.board()
 
-        # повідомлення про перемогу
         self.message_label = tk.Label(self.root, text="", font=("Helvetica", 16))
         self.message_label.grid(row=self.rows, columnspan=self.cols)
 
@@ -32,7 +31,7 @@ class MemoryGame:
             random.shuffle(colors)
             return [colors[i * 5:(i + 1) * 5] for i in range(4)]
 
-    def create_board(self):
+    def board(self):
         # Створення ігрового поля з кнопками
         self.rows = len(self.color_matrix)
         self.cols = len(self.color_matrix[0])
@@ -45,32 +44,22 @@ class MemoryGame:
             self.buttons.append(row)  # Додаємо рядок кнопок до списку
 
     def flip_card(self, i, j):
-        # Перевіряємо, чи кількість перевернутих карток менше 2 і чи картка ще не відкрита
         if len(self.flipped) < 2 and self.buttons[i][j]['bg'] == 'grey':
-            # Змінюємо колір кнопки на відповідний колір з матриці
             self.buttons[i][j].config(bg=self.color_matrix[i][j])
-            # Додаємо координати перевернутої картки до списку
             self.flipped.append((i, j))
-            # Якщо перевернуті дві картки, перевіряємо збіг
             if len(self.flipped) == 2:
-                self.root.after(1000, self.check_match)  # Затримка на 1 секунду перед перевіркою
+                self.root.after(1000, self.check)  # Затримка на 1 секунду перед перевіркою
 
-    def check_match(self):
-        # Отримуємо координати двох перевернутих карток
+    def check(self):
         i1, j1 = self.flipped[0]
         i2, j2 = self.flipped[1]
-        # Якщо кольори карток збігаються
         if self.color_matrix[i1][j1] == self.color_matrix[i2][j2]:
-            # Вимикаємо ці кнопки
-            self.buttons[i1][j1].config(state='disabled')
+            self.buttons[i1][j1].config(state='disabled') # робимо кнопку неактивною
             self.buttons[i2][j2].config(state='disabled')
         else:
-            # Якщо кольори не збігаються, повертаємо кнопки до сірого кольору
             self.buttons[i1][j1].config(bg='grey')
             self.buttons[i2][j2].config(bg='grey')
-        # Очищуємо список перевернутих карток
         self.flipped.clear()
-        # Якщо всі кнопки вимкнені, виводимо повідомлення про перемогу
         if all(button['state'] == 'disabled' for row in self.buttons for button in row):
             self.message_label.config(text="Вітаємо! Ви відкрили всі кольори!")
             self.level += 1
@@ -79,14 +68,13 @@ class MemoryGame:
             self.root.after(2000, self.restart_game)
 
     def restart_game(self):
-        # Перезапускаємо гру з новим рівнем складності
         for row in self.buttons:
             for button in row:
                 button.destroy()
         self.buttons.clear()
         self.flipped.clear()
         self.color_matrix = self.get_color_matrix()
-        self.create_board()
+        self.board()
 
 if __name__ == "__main__":
     root = tk.Tk()
