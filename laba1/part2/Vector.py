@@ -34,13 +34,3 @@ class Vector:
     def max(self):
         max1 = max(self.coords)
         return max1
-
-
-if __name__ == "__main__":
-    v = Vector(1, 2, 3)
-    v.show()
-    print(v.dim())
-    print(v.module())
-    print(v.mean())
-    print(v.min())
-    print(v.max())
