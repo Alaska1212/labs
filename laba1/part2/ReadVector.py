@@ -1,177 +1,71 @@
 from Vector import Vector
-def reader(file):
-    vectors = []
-    with open(file, 'r') as f:
+
+
+files = ("input01.txt", "input02.txt", "input03.txt", "input04.txt")
+
+for name in files:
+    with open(name, 'r') as f:
+        max_dim = (0, 0)
+        max_module = (0, 0)
+
+        sum = 0
+        counter = 0
+
+        max_coord = (0, 0)
+        min_coord = (0, 0)
+
+        vectors = []
         for line in f:
-            try:
-                data = line.split()
-                data = list(data)
-                vectors.append(Vector(data))
-            except AssertionError:
-                pass
-        return vectors
 
+            if line == "\n":
+                continue
 
-def big_size(vectors):  # векторс - набор всех векторов, список списков
-    pust = []
-    doppust = [0]
-    dopdoppust = []
-    for i in vectors:
-        size1 = i.size()
-        pust.append(size1)
-    t = 1
+            line = line.split()
+            args = []
+            for coord in line:
+                args.append(int(coord))
 
-    for i in pust:  # набор всех сайзов
-        try:
+            v = Vector(*args)
+            sum += v.module()
+            vectors.append(v)
 
-            if pust[t] > doppust[0]:
-                doppust.clear()
-                doppust.append(pust[t])
-
-                dopdoppust.clear()
-                dopdoppust.append(t)
-
-            elif pust[t] == pust[t - 1] and (pust[t] > max(pust) or (not doppust)):
-                if vectors[t].size() >= vectors[t - 1].size():
-                    doppust.append(pust[t - 1])
-                    dopdoppust.append(t - 1)
+            if v.dim() >= max_dim[0]:
+                if v.dim() == max_dim[0]:
+                    if v.module() < max_dim[1].module():
+                        max_dim = (v.dim(), v)
                 else:
-                    doppust.append(pust[t])
-                    dopdoppust.append(t)
-            t = t + 1
-        except IndexError:
-            break
-    for i in dopdoppust:
-        res = i
-    return (vectors[res])
+                    max_dim = (v.dim(), v)
 
-
-def big_module(vectors):  # векторс - набор всех векторов, список списков
-    pust = []
-    doppust = [0]
-    dopdoppust = []
-    for i in vectors:
-        module1 = i.module()
-        pust.append(module1)
-    t = 1
-
-    for i in pust:  # набор всех сайзов
-        try:
-
-            if pust[t] > doppust[0]:
-                doppust.clear()
-                doppust.append(pust[t])
-
-                dopdoppust.clear()
-                dopdoppust.append(t)
-
-            elif pust[t] == pust[t - 1] and (pust[t] > max(pust) or (not doppust)):
-                if vectors[t].module() >= vectors[t - 1].module():
-                    doppust.append(pust[t - 1])
-                    dopdoppust.append(t - 1)
+            if v.module() >= max_module[0]:
+                if v.module() == max_module[0]:
+                    if v.dim() < max_module[1].dim():
+                        max_module = (v.module(), v)
                 else:
-                    doppust.append(pust[t])
-                    dopdoppust.append(t)
-            t = t + 1
-        except IndexError:
-            break
-    for i in dopdoppust:
-        res = i
-    return (vectors[res])
+                    max_module = (v.module(), v)
 
+            if v.max() >= max_coord[0]:
+                if max_coord[0] == v.max():
+                    if v.min() < max_coord[1].min():
+                        max_coord = (v.max(), v)
+                else:
+                    max_coord = (v.max(), v)
 
-def avarage_vector(vectors):
-    ch = 0
-    chi = 0
-    for i in vectors:
-        ch = ch + i.module()
-        chi = chi + 1
-    return ch / chi
+            if min_coord[0] >= v.min():
+                if min_coord[0] == v.min():
+                    if v.max() > min_coord[1].max():
+                        min_coord = (v.min(), v)
+                else:
+                    min_coord = (v.min(), v)
 
+        mean_mod = sum / len(vectors)
 
-def more_than_avarage(vectors):
-    pust = []
-    avarageVector = avarage_vector(vectors)
-    for i in vectors:
-        if i.module() > avarageVector:
-            pust.append(i)
-    return len(pust)
+        for vector in vectors:
+            if vector.module() > mean_mod:
+                counter += 1
 
-
-def maximal(vectors):
-    pust = []
-    puster = []
-
-    t = 0
-    for i in vectors:
-        maxx = max(i.vector)  # ищет максимальное значение каждого вектора
-        pust.append(int(maxx))
-        puster.append(t)  # содержит теперь набор всех индексов, полностью всех
-        t = t + 1
-    for g in pust:
-        try:
-            if pust[g] > pust[g - 1]:
-                pust.remove(pust[g])
-                puster.remove(puster[g])
-            elif pust[g] == pust[g - 1]:
-                if min(vectors[g]) <= min(vectors[g]):
-                    pust.remove(pust[g - 1])
-                    puster.remove(puster[g - 1])
-                elif min(vectors[g - 1]) > min(vectors[g]):
-                    pust.remove(pust[g])
-                    puster.remove(puster[g])
-        except IndexError:
-            break
-    for i in puster:
-        a = i
-    return vectors[a]
-
-
-def minimal(vectors):
-    pust = []
-    puster = []
-
-    t = 0
-    for i in vectors:
-        maxx = min(i.vector)  # ищет максимальное значение каждого вектора
-        pust.append(int(maxx))
-        puster.append(t)  # содержит теперь набор всех индексов, полностью всех
-        t = t + 1
-    for g in pust:
-        try:
-            if pust[g] > pust[g - 1]:
-                pust.remove(pust[g])
-                puster.remove(puster[g])
-            elif pust[g] == pust[g - 1]:
-                if max(vectors[g]) >= max(vectors[g]):
-                    pust.remove(pust[g - 1])
-                    puster.remove(puster[g - 1])
-                elif max(vectors[g - 1]) < max(vectors[g]):
-                    pust.remove(pust[g])
-                    puster.remove(puster[g])
-        except IndexError:
-            break
-    for i in puster:
-        a = i
-    return vectors[a]
-
-
-if __name__ == '__main__':
-    for file in ("input01.txt", "input02.txt", "input03.txt", "input04.txt"):
-        print(file, ":", "big_size")
-        print(big_size((reader(file))))
-
-        print(file, ":", "big_module")
-        print(big_module((reader(file))))
-
-        print(file, ":", "avarage_vector")
-        print(avarage_vector((reader(file))))
-
-        print(file, ":", "more_than_avarage")
-        print(more_than_avarage((reader(file))))
-
-        print(file, ":", "maximal")
-        print(maximal((reader(file))))
-
-        print(file, ":", "minimal")
-        print(minimal((reader(file))))
+        print(f"{name}\n")
+        print(f"найбільша розмірність - {max_dim[0]}, вектор - {max_dim[1].show()}\n")
+        print(f"найбільша довижна - {max_module[0]}, вектор - {max_module[1].show()}\n")
+        print(f"середня довжина вектора - {mean_mod}, кількість векторів з більшою за середню довжину - {counter}\n")
+        print(f"найменшу компоненту - {min_coord[0]}, вектор - {min_coord[1].show()}\n")
+        print(f"найбільшу компоненту - {max_coord[0]}, вектор - {max_coord[1].show()}\n")
