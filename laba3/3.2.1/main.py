@@ -23,7 +23,7 @@ for file in names:
                 if len(a.solve()) == 1:
                     one_solve[float(a.solve()[0])] = str(a)
                 res_file.write(str(a) + '\n')
-                res_file.write(str(a.solve()) + '\n')
+
 
     k += 1
 
