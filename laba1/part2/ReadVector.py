@@ -1,7 +1,7 @@
 from Vector import Vector
 
 
-files = ("input01.txt", "input02.txt", "input03.txt", "input04.txt")
+files = ("input01.txt.txt", "input02.txt", "input03.txt", "input04.txt")
 
 for name in files:
     with open(name, 'r') as f:

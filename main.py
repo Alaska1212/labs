@@ -1,23 +1,20 @@
-from tkinter import *
-root = Tk()
+import tkinter as tk
 
-# Створюємо полотно
-canvas = Canvas(root, width=400, height=300)
-canvas.pack(side=LEFT)
+class CheckersBoard(tk.Frame):
+    def __init__(self, color1, color2):
+        super().__init__()
+        self.color1 = color1
+        self.color2 = color2
+        self.pack()  #для розміщення рамки (tk.Frame) в головному вікні
+        self.board = tk.Canvas(self, width=400, height=400)
+        self.board.pack()
+        self.draw_board()
+    def draw_board(self):
+        for i in range(8):
+            for j in range(8):
+                color = self.color1 if (i + j) % 2 == 0 else self.color2
+                self.board.create_rectangle(j * 50, i * 50, (j + 1) * 50, (i + 1) * 50, fill=color)
 
-# Створюємо овал
-id = canvas.create_oval(20, 20, 40, 40)
-
-def onCanvasClick(ev):
-    move(id)
-
-def move(ids):
-# Переміщуємо елемент на 5 пікселів по осі X
-    canvas.move(ids, 5, 0)
-# Рекурсивно викликаємо функцію move через 25 мілісекунд
-# та передаємо їй параметр ids
-    canvas.after(25, move, ids)
-
-canvas.bind('<Button-1>', onCanvasClick)
-
-root.mainloop()
+root = tk.Tk()
+app = CheckersBoard("peru","grey6")
+app.mainloop()
