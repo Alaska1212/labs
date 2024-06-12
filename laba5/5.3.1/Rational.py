@@ -46,9 +46,6 @@ class Rational:
         b = b // gcd
         return a, b
 
-    # endregion
-
-    # region magic_methods
 
     def __add__(self, other):
         a, b = self._get_other(other)
