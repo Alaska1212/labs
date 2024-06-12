@@ -2,7 +2,7 @@ from Equation import Equation
 from QuadraticEquation import QuadraticEquation
 from BiQuadraticEquation import BiQuadraticEquation
 
-names = ['input01.txt.txt', 'input02.txt', 'input03.txt']
+names = ['input01.txt', 'input02.txt', 'input03.txt']
 res = ['res01.txt', 'res02.txt', 'res03.txt']
 k = 0
 
